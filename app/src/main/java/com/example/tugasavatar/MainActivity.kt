@@ -1,4 +1,4 @@
-package com.example.tugasavatar // <-- Pastikan ini sesuai dengan nama paket Anda
+package com.example.tugasavatar
 
 import android.content.res.Configuration
 import android.os.Bundle
@@ -35,16 +35,13 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun AvatarPage() {
-    // State untuk mengontrol visibilitas setiap bagian wajah
     var showBrow by remember { mutableStateOf(true) }
     var showEyes by remember { mutableStateOf(true) }
     var showNose by remember { mutableStateOf(true) }
     var showMouth by remember { mutableStateOf(true) }
 
-    // Mendeteksi konfigurasi layar saat ini (termasuk orientasi)
     val configuration = LocalConfiguration.current
 
-    // Memilih tata letak berdasarkan orientasi layar
     when (configuration.orientation) {
         Configuration.ORIENTATION_LANDSCAPE -> {
             LandscapeLayout(
@@ -54,7 +51,7 @@ fun AvatarPage() {
                 showMouth = showMouth, onMouthChange = { showMouth = it }
             )
         }
-        else -> { // ORIENTATION_PORTRAIT
+        else -> {
             PortraitLayout(
                 showBrow = showBrow, onBrowChange = { showBrow = it },
                 showEyes = showEyes, onEyesChange = { showEyes = it },
@@ -116,7 +113,6 @@ fun LandscapeLayout(
             showMouth = showMouth
         )
         Spacer(modifier = Modifier.width(32.dp))
-        // Controls diletakkan dalam Column di sisi kanan
         Column(
             modifier = Modifier.weight(1f),
             horizontalAlignment = Alignment.CenterHorizontally,
